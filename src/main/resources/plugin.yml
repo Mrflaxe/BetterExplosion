@@ -1,0 +1,22 @@
+main: ru.mrflaxe.betterexplosion.BetterExplosion
+name: BetterExplosion
+author: Mrflaxe
+version: 1.0.0
+api-version: 1.16
+depend: [SKLibrary]
+
+commands:
+  launch:
+    description: launch self in direction of view
+    usage: /launch
+  setvector:
+    description: sets a vector
+    usage: /setvector
+
+permissions:
+  betterexplosion.command.launch:
+    description: allow to launch self.
+    default: true
+  betterexplosion.command.setvector:
+    description: allow to set vector
+    default: true
