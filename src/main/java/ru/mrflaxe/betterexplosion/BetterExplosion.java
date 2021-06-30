@@ -2,8 +2,6 @@ package ru.mrflaxe.betterexplosion;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import ru.mrflaxe.betterexplosion.commands.LaunchCommand;
-import ru.mrflaxe.betterexplosion.commands.SetVectorCommand;
 import ru.mrflaxe.betterexplosion.listeners.ExplosionListener;
 import ru.soknight.lib.configuration.Messages;
 
@@ -16,7 +14,6 @@ public class BetterExplosion extends JavaPlugin {
         initializeConfigs();
         
         registerListeners();
-        registerCommands();
     }
     
     private void initializeConfigs() {
@@ -26,10 +23,5 @@ public class BetterExplosion extends JavaPlugin {
     
     private void registerListeners() {
         new ExplosionListener(this).registerEvent();
-    }
-    
-    private void registerCommands() {
-        new LaunchCommand(messages, this);
-        new SetVectorCommand(messages, this);
     }
 }

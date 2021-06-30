@@ -74,12 +74,12 @@ public class ExplosionListener implements Listener {
         }
         
         toRemove.forEach(b -> e.blockList().remove(b));
-        
     }
     
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent e) {
         if(!e.getCause().equals(DamageCause.ENTITY_EXPLOSION)) return;
+        e.setCancelled(true);
         
         Entity damaged = e.getEntity();
         Entity damager = e.getDamager();
@@ -88,9 +88,9 @@ public class ExplosionListener implements Listener {
         Location damagerLoc = damager.getLocation();
         
         double distance = getDistance(playerLoc, damagerLoc);
-        Vector vector = getVector(damagerLoc, playerLoc.add(0,0.5,0));
+        Vector vector = getVector(damagerLoc, playerLoc.add(0,1,0));
         
-        vector.multiply(8);
+        vector.multiply(5);
         vector.multiply(1/distance);
         
         damaged.setVelocity(vector);
@@ -126,10 +126,10 @@ public class ExplosionListener implements Listener {
     }
     
     private double getDistance(Location firstLoc, Location secondLoc) {
-        double differenceOfX = Math.abs(firstLoc.getX() - secondLoc.getX());
-        double differenceOfY = Math.abs(firstLoc.getY() - secondLoc.getY());
+        double deltaX = Math.abs(firstLoc.getX() - secondLoc.getX());
+        double deltaZ = Math.abs(firstLoc.getZ() - secondLoc.getZ());
 
-        return Math.sqrt(differenceOfX * differenceOfX + differenceOfY * differenceOfY);
+        return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaZ, 2));
     }
     
     public void registerEvent() {
